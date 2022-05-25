@@ -1,0 +1,555 @@
+﻿<Window x:Class="DriverUI.View.MainUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DriverUI.ViewModel"
+        xmlns:m="clr-namespace:DriverUI.Model"
+        xmlns:local="clr-namespace:DriverUI.View"
+        mc:Ignorable="d"
+        Title="MainUI" Height="850" Width="1600">
+    <Window.DataContext>
+        <vm:viewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="pp" TargetType="Path">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity=".78" BlurRadius="4" RenderingBias="Performance"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="resetButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="resbut"
+                              Data="M-30,0 H207 V0 A 50 84 1 0 0 219,70 H-10 A 205 250 0 0 1 -40 0"
+                              Fill="#FF10181E" >
+                               
+                            </Path>
+                            <Label Name="ll"
+                                   Panel.ZIndex="1" 
+                                   Content="  RESET" 
+                                   FontSize="35" 
+                                   FontFamily="Cascadia Code SemiLight" 
+                                   VerticalAlignment="Center"
+                                   Foreground="#FFF08009"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="resbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="resbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="stpButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="stpbut"
+                                Data="M-50,0 H179 A 130 130 0 0 0 302 70 H-10 A 196 320 10 0 1 -50 0 " 
+                              Fill="#FF10181E" Stretch="None" >
+                            </Path>
+                            <Label  Content="  STOP" 
+                                    FontSize="35" 
+                                    FontFamily="Cascadia Code SemiLight" 
+                                    Foreground="#FFF08009"
+                                    VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="stpbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="stpbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="esButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="esbut"
+                                    Data="M0 0 H357 V0 A 105 154 0 0 0 330,80 H65 A 288 290 1 0 1 0 0" 
+                                    Fill="#FF10181E"  >
+                            </Path>
+                            <Label Panel.ZIndex="1"  
+                       Content=" EMERG. STOP" 
+                       FontSize="35"
+                       FontFamily="Cascadia Code SemiLight"
+                       Width="auto"
+                       Foreground="#FFF08009"
+                                   VerticalAlignment="Center" Margin="47,0,0,0"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="esbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="esbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="strtButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="strbut"
+                                    Data="M-30,0 H207 V0 A 50 84 1 0 0 219,70 H-10 A 205 250 0 0 1 -40 0"
+                                    Fill="#FF10181E" 
+                                    RenderTransformOrigin="0.5,0.5" >
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-1"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Label  Content="   START" 
+                                    FontSize="35"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Cascadia Code SemiLight"
+                                    Foreground="#FFF08009"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="strbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="strbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="forwrdButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="frbut"
+                                    Data="M-50,0 H179 A 130 130 0 0 0 302 70 H-10 A 196 320 10 0 1 -50 0 " 
+                                    Fill="#FF10181E"
+                                    RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-1"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Label  Content="       FORWARD" 
+                                    FontSize="35" 
+                                    VerticalAlignment="Center"
+                                    FontFamily="Cascadia Code SemiLight" 
+                                    Foreground="#FFF08009"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="frbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="frbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="revButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Path Style="{StaticResource pp}" Name="revbut"
+                                    Data="M0 0 H357 V0 A 105 154 0 0 0 330,80 H65 A 288 290 1 0 1 0 0"  
+                                    Fill="#FF10181E"  RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-1"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Label Panel.ZIndex="1" 
+                                    Height="60" 
+                                    Width="180" 
+                                    Margin="-155 -180" 
+                                    Content="REVERSE" 
+                                    FontSize="35" 
+                                    FontFamily="Cascadia Code SemiLight" 
+                                    Foreground="#FFF08009" Canvas.Top="-18"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="revbut" Property="Fill" Value="#FF10181E"  />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#FF00FFC4" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="5" RenderingBias="Performance"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="revbut" Property="Fill" Value="#FF10181E"/>
+                                <!--<Setter TargetName="ll" Property="Foreground" Value="White" />-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="tex" Background="#FF00000A">
+        <Canvas Margin="-80 0">
+
+            <Button 
+                Command="{Binding Altivar.ResetCommand }" 
+                Style="{StaticResource resetButton}"
+                RenderTransformOrigin="0.5,0.5" Canvas.Left="344" Canvas.Top="331" 
+                Panel.ZIndex="-1" Width="auto"/>
+            <Button 
+                Command="{Binding Altivar.StopCommand }" 
+                Style="{StaticResource stpButton}" 
+                RenderTransformOrigin="0.5,0.5" Canvas.Left="387" Canvas.Top="406"
+                Panel.ZIndex="-1"/>
+            <Button 
+                Command="{Binding Altivar.QuickStopCommand }" 
+                Style="{StaticResource esButton}" 
+                RenderTransformOrigin="0.5,0.5" Canvas.Left="380" Canvas.Top="481" 
+                Panel.ZIndex="0"/>
+            <Button 
+                Command="{Binding Altivar.StartCommand }" 
+                Style="{StaticResource strtButton}"
+                RenderTransformOrigin="0.5,0.5" Canvas.Left="1277" Canvas.Top="331"
+                Panel.ZIndex="-1"/>
+            <Button 
+                Command="{Binding Altivar.ForwardCommand }" 
+                Style="{StaticResource forwrdButton}"
+                RenderTransformOrigin="0.5,0.5" Canvas.Top="406" Canvas.Left="1152" 
+                Panel.ZIndex="-1"/>
+            <Button 
+                Command="{Binding Altivar.ReverseCommand }" 
+                Style="{StaticResource revButton}"
+                RenderTransformOrigin="0.5,0.5" Canvas.Top="481"  Canvas.Left="1102"
+                Panel.ZIndex="-1"/>
+
+
+            <StackPanel Canvas.Left="714" Canvas.Top="105" Panel.ZIndex="5">
+                <Grid  Height="410" Width="410">
+                    <ed:Arc  StartAngle="0" EndAngle="260" Stretch="None"
+                     StrokeThickness="25"      
+                    Stroke="#FF243B4D" RenderTransformOrigin="0.5,0.5" >
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-130.095"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+
+                    <ed:Arc StartAngle="0" Stretch="None" EndAngle="{Binding Altivar.GetCurrentSpeed}"
+                     StrokeThickness="25" 
+                     Stroke="White" RenderTransformOrigin="0.5,0.5">
+                        <!--<ed:Arc.Style>
+                                <Style TargetType="ed:Arc">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#FFFF0665" ShadowDepth="0" Direction="270" Opacity="1" BlurRadius="12" RenderingBias="Performance"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                                
+                            </ed:Arc.Style>-->
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-130.095"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+
+                    <Label Margin="0 -100 0 100" Height="40" Content="rpm" Foreground="White" HorizontalAlignment="Center"
+                        FontSize="22" FontWeight="SemiBold" FontFamily="Bahnschrift Light"/>
+
+                    <Label x:Name="er" Height="120" HorizontalContentAlignment="Center" Content="{Binding Altivar.SpeedReference}" FontFamily="Cascadia Mono Light" Foreground="White" Background="{x:Null}"  BorderBrush="{x:Null}"
+                        FontSize="100"/>
+
+                </Grid>
+
+
+            </StackPanel>
+
+
+
+            <StackPanel Canvas.Left="1033" Canvas.Top="220">
+                <Grid Height="250" Width="250" >
+                    <Ellipse Fill="{Binding ElementName=tex, Path=Background}"/>
+                    <ed:Arc StartAngle="0" EndAngle="237" Stretch="None"
+                     StrokeThickness="14"      
+                     Stroke="#FF243B4D" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-143"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+                    <ed:Arc StartAngle="0" Stretch="None" EndAngle="{Binding Altivar.GetCurrent}"
+                     StrokeThickness="14"
+                     Stroke="#FFFF8277" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-143"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="30 0 -30 0">
+                        <Label Margin="0 -15 0 15" Content="amper" Foreground="#FFFF8277" HorizontalAlignment="Center"
+                        FontSize="20" FontWeight="SemiBold" FontFamily="Bahnschrift Light"/>
+                        <Label x:Name="am" Content="{Binding Altivar.GetCurrent}" FontFamily="Cascadia Mono SemiLight" Foreground="#FFFF8277" Background="{x:Null}"  BorderBrush="{x:Null}" HorizontalContentAlignment="Center"
+                        FontSize="75" Width="160"/>
+                    </StackPanel>
+
+
+
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Canvas.Left="556" Canvas.Top="220">
+                <Grid Height="250" Width="250" >
+                    <Ellipse Fill="{Binding ElementName=tex, Path=Background}" />
+                    <ed:Arc StartAngle="0" EndAngle="237" Stretch="None"
+                     StrokeThickness="14"      
+                     Stroke="#FF243B4D" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-217"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+                    <ed:Arc StartAngle="0" Stretch="None" EndAngle="{Binding Altivar.GetVoltage}"
+                     StrokeThickness="14"
+                     Stroke="#FF63A1FC" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-217"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="-30 0 30 0">
+                        <Label Margin="0 -15 0 15" Content="volt" Foreground="#FF63A1FC" HorizontalAlignment="Center"
+                        FontSize="20" FontWeight="SemiBold" FontFamily="Bahnschrift Light"/>
+                        <Label x:Name="cam" Content="{Binding Altivar.GetVoltage}" FontFamily="Cascadia Mono SemiLight" Foreground="#FF63A1FC" Background="{x:Null}"  BorderBrush="{x:Null}" HorizontalContentAlignment="Center"
+                        FontSize="75" Width="160"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Canvas.Left="714" Canvas.Top="380">
+                <Grid Height="410" Width="410">
+                    <Ellipse Fill="{Binding ElementName=tex, Path=Background}"/>
+                    <ed:Arc StartAngle="0" EndAngle="260" Stretch="None"
+                     StrokeThickness="25"      
+                     Stroke="#FF243B4D" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-130.095"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+                    <ed:Arc StartAngle="0" Stretch="None" EndAngle="{Binding Altivar.GetCurrentFrequence}"
+                     StrokeThickness="25"
+                     Stroke="#FFB4D031" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-130.095"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="0 10 0 -20">
+                        <Label Margin="0 -20 0 40" Content="frequency" Foreground="#FFB4D031" HorizontalAlignment="Center"
+                        FontSize="22" FontWeight="SemiBold" FontFamily="Bahnschrift Light"/>
+                        <Label x:Name="eer" Content="{Binding Altivar.GetCurrentFrequence}" FontFamily="Cascadia Mono Light" Foreground="#FFB4D031" Background="{x:Null}"  BorderBrush="{x:Null}" HorizontalContentAlignment="Center"
+                        FontSize="120" Margin="0,-25,0,0" Width="219"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+
+            <Slider  x:Name="Slider" Value="{Binding Altivar.SpeedReference}"  Minimum="-500" Maximum="4000" Panel.ZIndex="5" TickFrequency="1" TickPlacement="TopLeft" Canvas.Top="750" Canvas.Left="650" HorizontalAlignment="Center" Foreground="{x:Null}" Width="532" />
+
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="1120 60">
+                <TextBox Text="{Binding Altivar.FrequenceReference}" FontFamily="Digital-7 Italic" Foreground="#FF7883A0" Background="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center"
+                        FontSize="90" Width="99" Height="86" >
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger  Property="IsMouseOver" Value="False">
+
+                                    <Setter Property="IsReadOnly" Value="True"/>
+
+                                </Trigger>
+                                <Trigger  Property="IsFocused" Value="True">
+
+                                    <Setter Property="IsReadOnly" Value="False"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <StackPanel>
+                    <Label Margin="0 15 20 -10" Content=" frequency"  Foreground="#FF7883A0" HorizontalAlignment="Center"
+                        FontSize="20" FontWeight="Normal" FontFamily="Bahnschrift Light"/>
+                    <Label  Margin="0 0 20 0" Content="setpoint"  Foreground="#FF7883A0" HorizontalAlignment="Center"
+                        FontSize="22" FontWeight="SemiBold" FontFamily="Bahnschrift Light"/>
+                </StackPanel>
+
+
+            </StackPanel>
+
+            <StackPanel Margin="100 40">
+                <StackPanel Orientation="Horizontal">
+
+                    <Label Content="system status :" FontFamily="Bahnschrift Light"  Foreground="#FF9C1B16" Padding="0"
+                        FontSize="22" FontWeight="SemiBold"/>
+
+                    <TextBlock Margin="40 0 0 0" Text="{Binding info}" FontFamily="Bahnschrift Light" Foreground="#FF9C1B16" Background="{x:Null}" FontSize="22" TextWrapping="WrapWithOverflow" Width="auto"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="driver status :" FontFamily="Bahnschrift Light"  Foreground="#FF9C1B16" Padding="0"
+                        FontSize="22" FontWeight="SemiBold"/>
+                    <TextBlock Margin="52 0 0 0" Text="{Binding Altivar.Status}" FontFamily="Bahnschrift Light" Foreground="#FF9C1B16" Background="{x:Null}" FontSize="22" TextWrapping="WrapWithOverflow" Width="400" Height="21"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+
+                    <Label Content="incoming fault code :" FontFamily="Bahnschrift Light"  Foreground="#FF9C1B16" Padding="0 0 0 0"
+                        FontSize="22" FontWeight="SemiBold"/>
+
+                    <TextBlock Margin="15 0" Text="{Binding Altivar.ErrorStatus}" FontFamily="Bahnschrift Light" Foreground="#FFB83631" Background="{x:Null}" FontSize="22" TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+
+    </Grid>
+</Window>
